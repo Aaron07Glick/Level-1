@@ -1,10 +1,7 @@
 package calc;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +10,6 @@ import javax.swing.JPanel;
 public class View {
 	JFrame frame = new JFrame();
 	JPanel panel = new JPanel();
-	JPanel displaypanel = new JPanel();
 	JButton button1 = new JButton("7");
 	JButton button2 = new JButton("8");
 	JButton button3 = new JButton("9");
@@ -30,18 +26,24 @@ public class View {
 	JButton button14 = new JButton("0");
 	JButton button15 = new JButton("+");
 	JButton button16 = new JButton("=");
-	JLabel label = new JLabel("hello", JLabel.CENTER);
+	JLabel label1 = new JLabel();
+	JLabel label2 = new JLabel();
+	JLabel label3 = new JLabel();
+	JLabel label4 = new JLabel();
+	// JLabel label = new JLabel("hello", JLabel.CENTER);
 
 	View() {
-		frame.add(displaypanel);
+
 		frame.add(panel);
 		frame.setVisible(true);
 		frame.setSize(500, 500);
-		frame.setLayout(new GridLayout(2, 1));
-		panel.setLayout(new GridLayout(4, 4));
-		displaypanel.add(label);
-		label.setBorder(BorderFactory.createLineBorder(Color.RED));
-		label.setPreferredSize(new Dimension(50, 50));
+		panel.setLayout(new GridLayout(5, 4));
+		// label.setBorder(BorderFactory.createLineBorder(Color.RED));
+		// label.setPreferredSize(new Dimension(50, 50));
+		panel.add(label1);
+		panel.add(label2);
+		panel.add(label3);
+		panel.add(label4);
 		panel.add(button1);
 		panel.add(button2);
 		panel.add(button3);
@@ -61,4 +63,39 @@ public class View {
 		// frame.pack();
 
 	}
+
+	void viewSetLabel1(int input1) {
+		label1.setText(input1 + "");
+	}
+
+	void viewSetLabel2(String input2) {
+		label1.setText(input2 + "");
+	}
+
+	void viewSetLabel3(int input3) {
+		label1.setText(input3 + "");
+	}
+
+	void viewSetLabel4(int output) {
+		label1.setText(output + "");
+	}
+
+	void addListener() {
+		button1.addActionListener(new Controller());
+		button2.addActionListener(new Controller());
+		button3.addActionListener(new Controller());
+		button4.addActionListener(new Controller());
+		button5.addActionListener(new Controller());
+		button6.addActionListener(new Controller());
+		button7.addActionListener(new Controller());
+		button8.addActionListener(new Controller());
+		button9.addActionListener(new Controller());
+		button10.addActionListener(new Controller());
+		button12.addActionListener(new Controller());
+		button13.addActionListener(new Controller());
+		button14.addActionListener(new Controller());
+		button15.addActionListener(new Controller());
+		button16.addActionListener(new Controller());
+	}
+
 }
