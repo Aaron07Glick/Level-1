@@ -64,20 +64,20 @@ public class View {
 
 	}
 
-	void viewSetLabel1(int input1) {
+	void viewSetLabel1(String input1) {
 		label1.setText(input1 + "");
 	}
 
 	void viewSetLabel2(String input2) {
-		label1.setText(input2 + "");
+		label2.setText(input2 + "");
 	}
 
-	void viewSetLabel3(int input3) {
-		label1.setText(input3 + "");
+	void viewSetLabel3(String input3) {
+		label3.setText(input3 + "");
 	}
 
-	void viewSetLabel4(int output) {
-		label1.setText(output + "");
+	void viewSetLabel4(String output) {
+		label4.setText(output + "");
 	}
 
 	void addListener() {
