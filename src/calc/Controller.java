@@ -25,12 +25,12 @@ public class Controller implements ActionListener {
 		// TODO Auto-generated method stub
 		// System.out.println("test");
 		JButton buttonPressed = (JButton) e.getSource();
-		System.out.println(buttonPressed.getText());
+		// System.out.println(buttonPressed.getText());
 		model.addNum(buttonPressed.getText());
-		model.getinput1();
 		view.viewSetLabel1(model.getinput1());
-		model.getinput1();
 		view.viewSetLabel2(model.input2());
+		view.viewSetLabel3(model.input3());
+		view.viewSetLabel4(model.output());
 	}
 
 }

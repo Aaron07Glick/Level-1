@@ -5,6 +5,7 @@ public class Model {
 	String input2 = "";
 	String input3 = "";
 	String output = "";
+	boolean operatorPressed;
 
 	String getinput1() {
 		return input1;
@@ -39,7 +40,41 @@ public class Model {
 	}
 
 	void addNum(String num) {
-		input1 = input1 + num;
-		System.out.println(input1);
+		if (num.equals("=")) {
+			calculate();
+		} else if (num.equals("C")) {
+			input1 = "";
+			input2 = "";
+			input3 = "";
+			output = "";
+			operatorPressed = false;
+		} else if (num.equals("+") || num.equals("-") || num.equals("/") || num.equals("*")) {
+			operatorPressed = true;
+			input2 = num;
+		} else if (operatorPressed == false) {
+			input1 = input1 + num;
+		} else if (operatorPressed == true) {
+			input3 = input3 + num;
+		}
+	}
+
+	void calculate() {
+		int input1Num = Integer.parseInt(input1);
+		// int input2Num = Integer.parseInt(input2);
+		int input3Num = Integer.parseInt(input3);
+		int outputNum = 0;
+		if (input2.equals("+")) {
+			outputNum = input1Num + input3Num;
+		}
+		if (input2.equals("-")) {
+			outputNum = input1Num + input3Num;
+		}
+		if (input2.equals("*")) {
+			outputNum = input1Num * input3Num;
+		}
+		if (input2.equals("/")) {
+			outputNum = input1Num / input3Num;
+		}
+		output = outputNum + "";
 	}
 }

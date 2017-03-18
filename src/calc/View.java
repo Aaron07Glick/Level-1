@@ -91,6 +91,7 @@ public class View {
 		button8.addActionListener(new Controller());
 		button9.addActionListener(new Controller());
 		button10.addActionListener(new Controller());
+		button11.addActionListener(new Controller());
 		button12.addActionListener(new Controller());
 		button13.addActionListener(new Controller());
 		button14.addActionListener(new Controller());
