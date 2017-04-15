@@ -1,3 +1,4 @@
+
 class frogger {
   public int x;
   public int y;
@@ -7,43 +8,65 @@ class frogger {
     this.y = y;
     this.hop = hop;
   }
-  void setX(int x){
-  this.x = x;
+  void setX(int x) {
+    this.x = x;
   }
-  void setY(int y){
-  this.y = y;
+  void setY(int y) {
+    this.y = y;
   }
 }
 frogger frog;
-Car car1, car2,car3,car4;
+Car car1, car2, car3, car4;
+int speed = 2;
+int level = 1;
+PImage carred, carred2;
+
 void setup() {
+
+  carred = loadImage("car.png");
+  carred2 = loadImage("car2.png");
+
   size(400, 400);
   frog = new frogger(200, 375, 10);
-  car1 = new Car(10, 50, 9);
-  car2 = new Car(350,115,-7);
-  car3 = new Car(10, 177,5);
-  car4 = new Car(350,239,-3);
+  car1 = new Car(10, 50, speed+2);
+  car2 = new Car(350, 115, -speed-1);
+  car3 = new Car(10, 177, speed+1);
+  car4 = new Car(350, 239, -speed);
 }  
 void draw() {
-  background(255, 0, 0);
+
+  background(255, 255, 0);
   fill(0, 255, 0);
   ellipse(frog.x, frog.y, frog.hop, frog.hop);
-  car1.display();
-  car2.display();
-  car3.display();
-  car4.display();
+  car1.display(1);
+  car2.display(2);
+  car3.display(3);
+  car4.display(4);
   car1.move();
   car2.move();
   car3.move();
   car4.move();
-  if (intersects(car1)||intersects(car2)||intersects(car3)||intersects(car4)){
-  frog.setX(200);
-  frog.setY(375);
+  if (intersects(car1)||intersects(car2)||intersects(car3)||intersects(car4)) {
+    frog.setX(200);
+    frog.setY(375);
+    car1.speed = 4;
+    car2.speed = -3;
+    car3.speed = 3;
+    car4.speed = -2;
+    level = 1;
   }
-  if (frog.y == 25){
-  text("Win", 200, 200);
-  textSize(100);
+  if (frog.y == 25) {
+    car1.speed+=1;
+    car2.speed-=1;
+    car3.speed+=1;
+    car4.speed-=1;
+    frog.setX(200);
+    frog.setY(375);
+    level +=1;
+    //println(car1.speed, car2.speed, car3.speed,car4.speed);
   }
+  text("level " + level, 20, 30);
+  textSize(40);
 }
 void keyPressed()
 {
@@ -87,38 +110,42 @@ class Car {
     this.x = x;
     this.y = y;
     this.speed = speed;
-    
   }
-  void move(){
-  x+=speed;
-  if(x>=400){
-  x=-50;
+
+  void move() {
+    x+=speed;
+    if (x>=400) {
+      x=-50;
+    } else if (x<=-50) {
+      x=400;
+    }
   }
-  else if(x<=-50){
-  x=400;
-  }
-  }
-  void display() 
+  void display(int i) 
   {
-    fill(0, 255, 0);
-    rect(x, y, 50, 50);
+
+    if (i % 2 == 0) {
+      image(carred2,x,y);
+      carred2.resize(0, 50);
+    } else {  
+      //println(x, y);
+      image(carred, x, y);
+      carred.resize(0, 50);
+    }
   }
-  int getX(){
-  return this.x;
+  int getX() {
+    return this.x;
   }
-  int getY(){
-  return this.y;
+  int getY() {
+    return this.y;
   }
-  int getSize(){
- return 50;
+  int getSize() {
+    return 50;
   }
-  
 }
 boolean intersects(Car car) {
-if ((frog.y > car.getY() && frog.y < car.getY()+50) && (frog.x > car.getX() && frog.x < car.getX()+car.getSize()))
-          return true;
-    else 
-        return false;
+  if ((frog.y > car.getY() && frog.y < car.getY()+50) && (frog.x > car.getX() && frog.x < car.getX()+car.getSize()))
+    return true;
+  else 
+    return false;
 }
-
 
