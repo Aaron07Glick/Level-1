@@ -5,8 +5,8 @@ public class leagueInvaders {
 	public static void main(String[] args) {
 		leagueInvaders league = new leagueInvaders();
 	}
-	final int WIDTH = 500;
-	final int HEIGHT = 800;
+	static final int WIDTH = 500;
+	static final int HEIGHT = 800;
 	JFrame frame;
 	gamepanel game;
 	
