@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -23,7 +26,9 @@ public class gamepanel extends JPanel implements ActionListener, KeyListener {
 	Font titleFont;
 	Font titleFont2;
 	Font titleFont3;
-
+	public static BufferedImage alienImg;
+	public static BufferedImage rocketImg;
+	public static BufferedImage bulletImg;
 	gamepanel() {
 		timer = new Timer(1000 / 60, this);
 		// object = new gameobject();
@@ -31,6 +36,15 @@ public class gamepanel extends JPanel implements ActionListener, KeyListener {
 		titleFont2 = new Font("Arial", Font.PLAIN, 48);
 		titleFont3 = new Font("Arial", Font.PLAIN, 48);
 		object.addObject(rocket);
+		try {
+			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	void updateMenuState() {
@@ -39,7 +53,16 @@ public class gamepanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 		// rocket.update();
 		object.update();
-
+		object.manageEnemies();
+		object.checkCollision();
+		if(rocket.isAlive==false){
+			currentState++;
+			object.reset();
+			rocket = new RocketShip(250,700,50,50);
+			object.addObject(rocket);
+		}
+		object.getScore();
+		
 	}
 
 	void updateEndState() {
@@ -47,7 +70,7 @@ public class gamepanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, leagueInvaders.WIDTH, leagueInvaders.HEIGHT);
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		g.setColor(Color.GREEN);
 		g.setFont(titleFont);
 		g.drawString("Press ENTER to start", 0, 400);
@@ -58,7 +81,7 @@ public class gamepanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, leagueInvaders.WIDTH, leagueInvaders.HEIGHT);
+		g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
 		// rocket.draw(g);
 		object.draw(g);
 	}
@@ -128,6 +151,9 @@ public class gamepanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			rocket.right();
+		}
+		if (e.getKeyCode()==KeyEvent.VK_SPACE){
+			object.addObject(new Projectiles(rocket.x, rocket.y, 10,10, true));
 		}
 	}
 

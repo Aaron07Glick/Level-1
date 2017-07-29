@@ -2,9 +2,9 @@ package LeagueInvaders;
 
 import javax.swing.JFrame;
 
-public class leagueInvaders {
+public class LeagueInvaders {
 	public static void main(String[] args) {
-		leagueInvaders league = new leagueInvaders();
+		LeagueInvaders league = new LeagueInvaders();
 	}
 
 	static final int WIDTH = 500;
@@ -12,7 +12,7 @@ public class leagueInvaders {
 	JFrame frame;
 	gamepanel game;
 
-	leagueInvaders() {
+	LeagueInvaders() {
 		frame = new JFrame();
 		game = new gamepanel();
 		setup();

@@ -12,12 +12,13 @@ public class RocketShip extends GameObject {
 	}
 
 	void update() {
-
+		super.update();
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
+		//g.setColor(Color.BLUE);
+		//g.fillRect(x, y, width, height);
+		g.drawImage(gamepanel.rocketImg, x,y,width,height,null);
 
 	}
 
@@ -29,6 +30,7 @@ public class RocketShip extends GameObject {
 	public void down() {
 		// TODO Auto-generated method stub
 		y += speed;
+		
 	}
 
 	public void left() {
